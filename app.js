@@ -15,8 +15,13 @@ function getUser(e) {
     let username = userNameElement.value;
 
     gitbub.getUserInfos(username)
-    .then(userData => ui.addProfileInfostoUI(userData.userInfos))
+    .then(userData => {
+        ui.addProfileInfostoUI(userData.userInfos);
+        userData.repoInfos.forEach((repo) => ui.addRepoInfostoUI(repo));
+    })
     .catch(err => console.log(err));
+
+    ui.clearInput();
 
     e.preventDefault();
 }

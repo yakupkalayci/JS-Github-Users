@@ -3,6 +3,7 @@ class UI {
         this.profileDiv = document.querySelector("#profile");
         this.repoDiv = document.querySelector("#repos");
         this.lastSearchesDiv = document.querySelector("#lastSearch");
+        this.usernameInput = document.querySelector("#username");
     }
 
     addProfileInfostoUI(userInfos) {
@@ -48,6 +49,33 @@ class UI {
                 </div>
             </div>
         </div>
+        `
+    }
+
+    clearInput() {
+        this.usernameInput.value = "";
+    }
+
+    addRepoInfostoUI(repoInfos) {
+        this.repoDiv.innerHTML += `
+        <div class="mb-2 card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <a href="${repoInfos.html_url}" target="_blank" id="repoName">${repoInfos.name}</a>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-secondary">
+                    Starlar <span class="badge badge-light" id="repoStar">${repoInfos.stargazers_count}</span>
+                </button>
+    
+                <button class="btn btn-info">
+                    Forklar <span class="badge badge-light" id="repoFork">${repoInfos.forks_count}</span>
+                </button>
+    
+            </div>
+        </div> 
+
+    </div> 
         `
     }
 }
