@@ -2,7 +2,7 @@ class UI {
     constructor() {
         this.profileDiv = document.querySelector("#profile");
         this.repoDiv = document.querySelector("#repos");
-        this.lastSearchesDiv = document.querySelector("#lastSearch");
+        this.lastSearchesList = document.querySelector("#last-users");
         this.usernameInput = document.querySelector("#username");
     }
 
@@ -57,25 +57,46 @@ class UI {
     }
 
     addRepoInfostoUI(repoInfos) {
-        this.repoDiv.innerHTML += `
-        <div class="mb-2 card-body">
-        <div class="row">
-            <div class="col-md-2">
-                <a href="${repoInfos.html_url}" target="_blank" id="repoName">${repoInfos.name}</a>
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-secondary">
-                    Starlar <span class="badge badge-light" id="repoStar">${repoInfos.stargazers_count}</span>
-                </button>
-    
-                <button class="btn btn-info">
-                    Forklar <span class="badge badge-light" id="repoFork">${repoInfos.forks_count}</span>
-                </button>
-    
-            </div>
-        </div> 
+        this.repoDiv.innerHTML = "";
 
-    </div> 
-        `
+        repoInfos.forEach(repo => {
+            this.repoDiv.innerHTML += `
+            <div class="mb-2 card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="${repoInfos.html_url}" target="_blank" id="repoName">${repo.name}</a>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-secondary">
+                        Starlar <span class="badge badge-light" id="repoStar">${repo.stargazers_count}</span>
+                    </button>
+        
+                    <button class="btn btn-info">
+                        Forklar <span class="badge badge-light" id="repoFork">${repo.forks_count}</span>
+                    </button>
+        
+                </div>
+            </div> 
+    
+        </div> 
+            `  
+        })
+    }
+
+    addUsersFromStorage(storage) {
+        this.lastSearchesList.innerHTML = "";
+
+        if(storage) {
+            storage.forEach(user => {
+                this.lastSearchesList.innerHTML += `
+                <a href="${user.url}">
+                <li class="list-group-item">${user.username}</li></a>
+                `
+            })
+        } else console.log("hello")
+    }
+
+    clearLastSearches() {
+        this.lastSearchesList.innerHTML = "";
     }
 }
