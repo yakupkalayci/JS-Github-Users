@@ -89,7 +89,7 @@ class UI {
         if(storage) {
             storage.forEach(user => {
                 this.lastSearchesList.innerHTML += `
-                <a href="${user.url}">
+                <a href="${user.url}" target="_blank">
                 <li class="list-group-item">${user.username}</li></a>
                 `
             })

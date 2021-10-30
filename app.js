@@ -23,7 +23,7 @@ function getUser(e) {
     .then(userData => {
         ui.addProfileInfostoUI(userData.userInfos);
         ui.addRepoInfostoUI(userData.repoInfos);
-        storage.addUser(userData.userInfos.login, userData.userInfos.url);
+        storage.addUser(userData.userInfos.login, userData.userInfos.html_url);
         ui.addUsersFromStorage(storage.getStorage());
     })
     .catch(err => console.log(err));

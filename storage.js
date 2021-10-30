@@ -3,7 +3,7 @@ class Storage {
     addUser(userName, url) {
         let users;
 
-        let user = {
+        let newUser = {
             username : userName,
             url : url,
         }
@@ -14,9 +14,21 @@ class Storage {
             users = [];
         }
 
-        users.push(user);
+        let flag = false;
 
-        localStorage.setItem("users", JSON.stringify(users));
+        if(users.length > 0) {
+            users.forEach((user) => {
+                if(user.username == newUser.username) {
+                    flag = true;
+                }
+            })
+        }
+
+        if(!flag) {
+            users.push(newUser);
+
+            localStorage.setItem("users", JSON.stringify(users));   
+        }
     }
 
     getStorage() {
